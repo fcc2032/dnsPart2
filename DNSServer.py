@@ -76,13 +76,13 @@ dns_records = {
         ),
     },
     # Add more records as needed (see assignment instructions!
-     'nyu.edu.': {
+    'nyu.edu.': {
         dns.rdatatype.A: '192.168.1.106',
         dns.rdatatype.AAAA: '2001:0db8:85a3:0000:0000:8a2e:0373:7312',
         dns.rdatatype.MX: [(10, 'mxa-00256a01.gslb.pphosted.com.')],
         dns.rdatatype.CNAME: 'www.nyu.edu.',
         dns.rdatatype.NS: 'ns1.nyu.edu.',
-        dns.rdatatype.TXT: (encrypted_value,),
+        dns.rdatatype.TXT: (encrypted_value.decode('utf-8')),
         dns.rdatatype.SOA: (
             'ns1.nyu.edu.', #mname
             'admin.nyu.edu.', #rname
@@ -93,22 +93,18 @@ dns_records = {
             86400, #minimum
         ),
     },
-    'google.com': {
+    'safebank.com.': {
+        dns.rdatatype.A: '192.168.1.105',
+    },
+    'yahoo.com.': {
+        dns.rdatatype.A: '192.168.1.102',
+    },
+    'google.com.': {
         dns.rdatatype.A: '192.168.1.103',
-        dns.rdatatype.NS: 'ns1.google.com.',
-        dns.rdatatype.SOA: (
-            'ns1.google.com.', #mname
-            'admin.google.com.', #rname
-            2023081401, #serial
-            3600, #refresh
-            1800, #retry
-            604800, #expire
-            86400, #minimum
-        ),
-         },
-    'safebank.com': {
-        dns.rdatatype.A: '192.168.1.102'
-         }
+    },
+    'legitsite.com.': {
+        dns.rdatatype.A: '192.168.1.104',
+    }
 }
 
 def run_dns_server():
@@ -122,7 +118,6 @@ def run_dns_server():
             data, addr = server_socket.recvfrom(1024)
             # Parse the request using the `dns.message.from_wire` method
             request = dns.message.from_wire(data)
-            print(request)
             # Create a response message using the `dns.message.make_response` method
             response = dns.message.make_response(request)
 
@@ -160,7 +155,7 @@ def run_dns_server():
 
             # Send the response back to the client using the `server_socket.sendto` method and put the response to_wire(), return to the addr you received from
             print("Responding to request:", qname)
-            print(response)
+            #print(response)
             server_socket.sendto(response.to_wire(), addr) 
         except KeyboardInterrupt:
             print('\nExiting...')
