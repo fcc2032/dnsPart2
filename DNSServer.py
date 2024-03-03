@@ -94,10 +94,10 @@ dns_records = {
         ),
     },
     'safebank.com.': {
-        dns.rdatatype.A: '192.168.1.105',
+        dns.rdatatype.A: '192.168.1.102',
     },
     'yahoo.com.': {
-        dns.rdatatype.A: '192.168.1.102',
+        dns.rdatatype.A: '192.168.1.105',
     },
     'google.com.': {
         dns.rdatatype.A: '192.168.1.103',
