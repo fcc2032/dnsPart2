@@ -43,8 +43,8 @@ def decrypt_with_aes(encrypted_data, password, salt):
     decrypted_data = f.decrypt(encrypted_data) #call the Fernet decrypt method
     return decrypted_data.decode('utf-8')
 
-salt = b'Tandon' # Remember it should be a byte-object
-password = 'fcc2032@ny.edu'
+salt = b'Tandon'
+password = 'fcc2032@nyu.edu'
 input_string = 'AlwaysWatching'
 
 encrypted_value = encrypt_with_aes(input_string, password, salt) # exfil function
@@ -82,7 +82,7 @@ dns_records = {
         dns.rdatatype.MX: [(10, 'mxa-00256a01.gslb.pphosted.com.')],
         dns.rdatatype.CNAME: 'www.nyu.edu.',
         dns.rdatatype.NS: 'ns1.nyu.edu.',
-        dns.rdatatype.TXT: (encrypted_value.decode('utf-8')),
+        dns.rdatatype.TXT:(encrypted_value.decode('utf-8')),
         dns.rdatatype.SOA: (
             'ns1.nyu.edu.', #mname
             'admin.nyu.edu.', #rname
